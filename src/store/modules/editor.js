@@ -47,7 +47,7 @@ export default handleActions({
             const { title, tags, body } = action.payload.data;
             return state.set('title', title)
                 .set('markdown', body)
-                .set('tags', tags);
+                .set('tags', tags.join(', '));
         }
     })
 }, initialState)

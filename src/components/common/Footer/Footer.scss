@@ -14,15 +14,18 @@
     font-size: 2rem;
     font-weight: 600;
   }
-
-  .admin-login {
-    margin-top: 0.5rem;
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    &:hover {
-      color:white;
+  .content{
+    display: flex;
+    .admin-login {
+      margin-top: 0.5rem;
+      margin-right: 0.5rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      &:hover {
+        color:white;
+      }
     }
   }
 }
