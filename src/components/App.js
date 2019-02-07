@@ -1,8 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ListPage, PostPage, EditorPage, NotFoundPage } from 'pages';
+import { ListPage, PostPage, EditorPage, SignUpPage, LoginPage, NotFoundPage } from 'pages';
 import Base from 'containers/common/Base'
-import SignUpPage from "pages/SignUpPage";
 
 const App = () => {
     return (
@@ -14,6 +13,7 @@ const App = () => {
                 <Route path="/post/:id" component={PostPage}/>
                 <Route path="/editor" component={EditorPage}/>
                 <Route path="/signup" component={SignUpPage}/>
+                <Route path="/login" component={LoginPage}/>
                 <Route component={NotFoundPage}/>
             </Switch>
             <Base/>

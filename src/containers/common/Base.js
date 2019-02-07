@@ -1,17 +1,23 @@
 import React, {Component} from 'react';
-import LoginModalContainer from 'containers/modal/LoginModalContainer';
+import LoginContainer from 'containers/login/LoginContainer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 
 class Base extends Component {
-    initialize = () => {
-
+    initialize = async () => {
         const { BaseActions } = this.props;
-        // if(localStorage.logged === "true"){
-        //     BaseActions.tempLogin();
-        // }
-        // BaseActions.checkLogin();
+        if(localStorage.logged){
+            BaseActions.tempLogin();
+        }
+        try {
+            await BaseActions.checkLogin();
+            localStorage.logged=true;
+        }catch(e){
+            localStorage.removeItem("accessToken");
+            localStorage.logged='';
+            debugger;
+        }
     }
     componentDidMount(){
         this.initialize();
@@ -20,7 +26,7 @@ class Base extends Component {
     render() {
         return (
             <div>
-                <LoginModalContainer/>
+
             </div>
         );
     }

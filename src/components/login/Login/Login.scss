@@ -3,9 +3,15 @@
 .form {
   background: white;
   padding: 2rem;
-  position: relative;
+  //position: relative;
   padding-top: 2.5rem;
-  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  width: 1024px;
+  margin: 0 auto;
+  justify-content: center;
+  min-height: calc(100vh - 15rem);
+  //width: 20rem;
   .close {
     line-height: 2rem;
     font-size: 2rem;
@@ -18,8 +24,9 @@
     }
   }
   .title{
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: 500;
+    margin-bottom: 1rem;
   }
   .description {
     margin-top: 0.25rem;
@@ -41,6 +48,7 @@
     padding: 0.25rem;
     outline: none;
     border-radius: 4px;
+    margin-bottom: 0.5rem;
   }
 
   .login {

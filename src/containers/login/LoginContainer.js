@@ -1,25 +1,21 @@
 import React, {Component} from 'react';
-import LoginModal from 'components/modal/LoginModal';
+import Login from 'components/login/Login';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
+import { withRouter } from 'react-router-dom';
 
-class LoginModalContainer extends Component {
+class LoginContainer extends Component {
     handleLogin = async () => {
-        const { BaseActions, usernameOrEmail, password } = this.props;
+        const { BaseActions, usernameOrEmail, password, history } = this.props;
         try{
             await BaseActions.login({usernameOrEmail, password});
-            BaseActions.hideModal('login');
-            localStorage.logged="true";
+            history.push('/');
         }catch(e){
             console.log(e);
         }
     }
 
-    handleCancel = () => {
-        const { BaseActions } = this.props;
-        BaseActions.hideModal('login');
-    }
     handleChange = ({name, value}) => {
         const { BaseActions } = this.props;
         BaseActions.changeInput({name, value});
@@ -31,13 +27,13 @@ class LoginModalContainer extends Component {
     }
     render() {
         const {
-            handleLogin, handleCancel, handleChange, handleKeyPress
+            handleLogin, handleChange, handleKeyPress
         } = this;
         const { visible,error, loginId, password } = this.props;
 
         return (
-            <LoginModal
-                onLogin={handleLogin} onCancel={handleCancel}
+            <Login
+                onLogin={handleLogin}
                 onChange={handleChange} onKeyPress={handleKeyPress}
                 visible={visible} error={error} loginId= {loginId} password={password}
             />
@@ -48,11 +44,11 @@ class LoginModalContainer extends Component {
 export default connect(
     (state) => ({
         visible: state.base.getIn(['modal', 'login']),
-        usernameOrEmail: state.base.getIn(['loginModal', 'usernameOrEmail']),
-        password: state.base.getIn(['loginModal', 'password']),
-        error: state.base.getIn(['loginModal', 'error'])
+        usernameOrEmail: state.base.getIn(['login', 'usernameOrEmail']),
+        password: state.base.getIn(['login', 'password']),
+        error: state.base.getIn(['login', 'error'])
     }),
     (dispatch) => ({
         BaseActions: bindActionCreators(baseActions, dispatch)
     })
-)(LoginModalContainer);
+)(withRouter(LoginContainer));

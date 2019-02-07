@@ -22,6 +22,8 @@ class AskRemoveModalContainer extends Component {
             history.push('/');
         }catch(e) {
             console.log(e);
+            localStorage.logged='';
+            history.push('/login');
         }
     }
     render() {

@@ -3,25 +3,28 @@ import Footer from 'components/common/Footer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
+import { withRouter } from 'react-router-dom';
 
 class FooterContainer extends Component {
-    handleLoginClick = async () => {
-        const { BaseActions, logged } = this.props;
+    handleLoginClick = () => {
+        const logged = localStorage.logged;
+        const { BaseActions, history } = this.props;
         if(logged){
             try{
-                await BaseActions.logout();
+                localStorage.removeItem("accessToken");
+                localStorage.logged = '';
                 window.location.reload();
             }catch(e){
                 console.log(e);
             }
             return;
         }
-        BaseActions.showModal('login');
-        BaseActions.initializeLoginModal();
+        history.push('/login');
+        BaseActions.initializeLogin();
     }
     render() {
         const { handleLoginClick } = this;
-        const { logged } = this.props;
+        const logged = localStorage.logged;
         return (
             <Footer onLoginClick={handleLoginClick} logged={logged}/>
         );
@@ -29,10 +32,8 @@ class FooterContainer extends Component {
 }
 
 export default connect(
-    (state) => ({
-        logged: state.base.get('logged')
-    }),
+    null,
     (dispatch) => ({
         BaseActions: bindActionCreators(baseActions, dispatch)
     })
-)(FooterContainer);
+)(withRouter(FooterContainer));

@@ -43,6 +43,8 @@ class EditorHeaderContainer extends Component {
             history.push(`/post/${this.props.postId}`);
         } catch(e) {
             console.log(e);
+            localStorage.logged = '';
+            history.push('/login');
         }
     }
 

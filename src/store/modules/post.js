@@ -25,5 +25,12 @@ export default handleActions({
             const { data: post } = action.payload;
             return state.set('post', fromJS(post));
         }
+    }),
+    ...pender({
+        type: REMOVE_POST,
+        onError: (state, action) => {
+            const { status } = action.payload.response;
+
+        }
     })
 }, initialState)
