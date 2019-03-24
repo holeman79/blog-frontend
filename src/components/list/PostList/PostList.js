@@ -24,21 +24,24 @@ const PostItem = ({title, body, publishedDate, tags, id}) => {
 }
 
 const PostList = ({posts}) => {
-    const postList = posts.map(
-        (post) => {
-            const { id, title, body, publishedDate, tags } = post.toJS();
-            return (
-                <PostItem
-                    title={title}
-                    body={body}
-                    publishedDate={publishedDate}
-                    tags={tags}
-                    key={id}
-                    id={id}
-                />
-            )
-        }
-    );
+    var postList = "";
+    if(posts.size > 0) {
+        postList = posts.map(
+            (post) => {
+                const {id, title, body, publishedDate, tags} = post.toJS();
+                return (
+                    <PostItem
+                        title={title}
+                        body={body}
+                        publishedDate={publishedDate}
+                        tags={tags}
+                        key={id}
+                        id={id}
+                    />
+                )
+            }
+        );
+    }
     return (
         <div className={cx('post-list')}>
             {postList}

@@ -49,5 +49,5 @@ export default handleActions({
                 .set('markdown', body)
                 .set('tags', tags.join(', '));
         }
-    })
+    }),
 }, initialState)

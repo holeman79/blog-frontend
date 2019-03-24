@@ -16,7 +16,6 @@ class Base extends Component {
         }catch(e){
             localStorage.removeItem("accessToken");
             localStorage.logged='';
-            debugger;
         }
     }
     componentDidMount(){
